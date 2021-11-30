@@ -1,0 +1,31 @@
+.config_text_area {
+ 
+  background: 0 0;
+
+ 
+  overflow: auto;
+  padding: 6px 16px;
+  resize: none;
+
+  font-size: 16px;
+  line-height: 24px;
+  margin: 0;
+  height: 100%;
+  flex: 1 1 auto;
+  min-height: 168px;
+
+  font-family: 'Roboto', sans-serif;
+}
+
+.emoji-mart-scroll {
+  height: 170px !important;
+}
+
+
+.emoji-mart-bar {
+  display: none !important;
+}
+
+.-bottom-62 {
+  bottom: -12.5rem;
+}

@@ -1,0 +1,17 @@
+.authimg {
+  height: 436px;
+  opacity: 0;
+  position: absolute;
+  transition: all 0.7s ease;
+  top: 15.5%;
+  left: 32.7%;
+  visibility: hidden;
+  width: 246px;
+  
+}
+
+.active {
+  opacity: 1 ;
+ 
+  visibility: visible;
+}

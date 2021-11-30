@@ -1,0 +1,84 @@
+@import 'tailwindcss/base';
+
+@import 'tailwindcss/components';
+
+@import 'tailwindcss/utilities';
+
+@import 'styles/normal.css';
+
+@import 'styles/formStyle.css';
+
+@import 'react-notifications-component/dist/theme.css';
+
+@layer components {
+  .navBtn {
+    @apply cursor-pointer h-6 transition-all duration-150 ease-out  w-6
+  }
+  .header_input {
+    @apply text-gray-800 block w-full pl-10 py-1  sm:text-sm rounded-md border-gray-300 focus:border-black focus:ring-black
+  }
+  .stories_profile {
+    @apply w-14 h-14 rounded-full mb-1 max-w-xl border-red-500 border-2 hover:scale-110 transition transform duration-200 ease-out cursor-pointer p-0
+  }
+
+  .iconButton {
+    @apply h-7 w-7 cursor-pointer transition-all duration-150 ease-out
+  }
+
+  .borderG {
+    @apply border border-gray-300
+  }
+
+  .caption {
+    @apply text-xs text-gray-500
+  }
+
+  .tooltip_red {
+    @apply absolute bg-red-600 text-white -top-1 -right-1 text-xs h-5 w-5 animate-pulse rounded-full flex items-center justify-center
+  }
+
+  .modal_button_bkue {
+    @apply text-center mt-4 text-white text-sm px-3 py-2 font-semibold rounded-md bg-blue-500 hover:bg-blue-400 cursor-pointer
+    transition-all duration-200
+  }
+
+  .drawler_action_button {
+    @apply flex items-center justify-between p-[8px] bg-[#19191a] cursor-pointer transition-all duration-200 hover:opacity-80 hover:bg-gray-800 text-gray-200
+  }
+
+  .drop_drawler_item {
+    @apply p-3 border-b border-gray-300 flex justify-between cursor-pointer items-center hover:text-white opacity-80 hover:opacity-100 transition-all duration-150
+  }
+
+  .drop_drawler_list {
+    @apply  bg-[#1e1b21] border border-gray-900 text-gray-300 bg-opacity-95 w-32 rounded-md overflow-hidden transition-all duration-200 absolute 
+  }
+
+  .confirm-button {
+    @apply outline-none border-0 border-t py-3 hover:bg-gray-50 transition-all duration-200 border-gray-300  flex items-center justify-center text-sm 
+  }
+
+  .add_post_modal {
+    @apply 
+    inline-block
+      my-8 overflow-hidden 
+    text-left align-middle transition-all 
+    transform bg-white shadow-xl rounded-lg
+  }
+
+  .stories_bar {
+    @apply flex space-x-2 p-[16px] gap-[12px] bg-white mt-8 border-gray-300 border rounded-sm overflow-x-scroll scrollbar-thin scrollbar-thumb-black 
+  }
+
+  input::placeholder {
+    @apply text-gray-500;
+  }
+
+  input::placeholder {
+    visibility: visible !important;
+  }
+
+  .visibility-hidden {
+    visibility: hidden
+  }
+}

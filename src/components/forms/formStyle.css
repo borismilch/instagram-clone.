@@ -1,0 +1,24 @@
+.image_DrawlerStyle {
+  max-height: fit-content !important;
+  max-width: -webkit-fill-available !important;
+  margin: auto;
+  position: absolute;
+  top: 0;
+  aspect-ratio: 1/1;
+  bottom: 0;
+  object-fit: cover;
+  left: 0;
+  right: 0;
+}
+
+.ratio-16-9 {
+  aspect-ratio: 16/9;
+}
+
+.ratio-1-1 {
+  aspect-ratio: 1/1;
+}
+
+.ratio-4-5 {
+  aspect-ratio: 4/5;
+}

@@ -1,0 +1,64 @@
+::-webkit-scrollbar {
+  width: 10px;
+  height: 7px;
+ 
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #f1f1f1; 
+  opacity: 0 !important;
+}
+ 
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #706c6c;
+  opacity: 0 !important; 
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #5e5a5a; 
+  opacity: 1 !important;
+}
+::-webkit-scrollbar-track:hover {
+  opacity: 1 !important;
+}
+
+.sml {
+  display: inline-flex !important;
+}
+
+.smd {
+  display: none;
+}
+
+@media (min-width: 768px) {
+  .smd {
+    display: inline-flex !important;
+  } 
+  .sml {
+    display: none !important;
+  }
+
+}
+
+.smdxl {
+  display: none !important;
+ 
+}
+
+.mdw {
+  max-width: 100% !important;
+  
+}
+
+
+@media (min-width: 996px) {
+  .mdw {
+    max-width: 615px !important;
+  }
+  .smdxl {
+    display: inline-flex !important;
+  }
+}

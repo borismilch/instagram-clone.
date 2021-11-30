@@ -1,0 +1,28 @@
+.heart_active {
+  animation-duration: 1000ms;
+  animation-name: like-heart-animation;
+  animation-timing-function: ease-in-out;
+}
+
+.instagram-heart {   
+  width: 92px;
+  height: 81px;
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  margin: auto;
+  background: url("https://imgur.com/rksyGE8.png") no-repeat center/contain;
+  opacity: 0;
+  transform: scale(0);
+}
+
+
+@keyframes like-heart-animation{ 
+  0% { opacity:0; transform:scale(0); }
+  15% { opacity:.9; transform:scale(1.2); }
+  30% { transform:scale(.95); }
+  45%,
+  80% { opacity:.9; transform:scale(1); }
+}
