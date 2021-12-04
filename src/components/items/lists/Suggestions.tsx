@@ -1,21 +1,31 @@
 import React from 'react' 
 import {FC, useState, useEffect, useCallback} from 'react'
 import Suggesttion from '../Suggestion'
-import faker from 'faker'
-import { IProfile } from '../../../types'
 
+import { useHistory } from 'react-router'
+
+
+import { collection, DocumentData, onSnapshot } from '@firebase/firestore'
+import { db } from '../../../../firebase'
+
+import { connect, useSelector } from 'react-redux'
 
 const Suggestions: FC = () => {
 
-  const [suggestions, setSuggestions] = useState([])
+  const followers = useSelector((state: any) => state.user.followers).map((s: {id: string} ) => s.id)
+
+  const history = useHistory()
+
+  const [suggestions, setSuggestions] = useState<DocumentData[]>([])
+
+  const pushHistory = () => {
+    history.push('/recomandations')
+  }
   
   useEffect(() => {
-    const suggestions: IProfile[] = new Array(6).fill('').map((_, i) => ({
-      ...faker.helpers.createCard(),
-      image: faker.image.avatar(),
-      id: i
-    }))
-
+    const usersRef = collection(db, 'users')
+    onSnapshot(usersRef, (span) => {setSuggestions(span.docs.filter(s => !followers.includes(s.id) ))})
+    
     setSuggestions(suggestions)
 
   }, [])
@@ -24,13 +34,13 @@ const Suggestions: FC = () => {
     <>
       <div className='flex items-center justify-between mb-3'>
         <h1 className='text-gray-600 text-sm font-bold'>Suggestions for you</h1>
-        <p className='text-blue-500'>See All</p>
+        <p onClick={pushHistory.bind(null)} className='text-blue-500'>See All</p>
   
       </div>
     
       {
-        suggestions.map((s: IProfile) => (
-          <Suggesttion key={s.id} suggestion={s} />
+        suggestions.map((s) => (
+          <Suggesttion key={s.id} suggestion={s.data()} />
         ))
       }
       
@@ -38,4 +48,4 @@ const Suggestions: FC = () => {
   )
 }
 
-export default Suggestions
+export default connect()(Suggestions)

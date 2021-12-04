@@ -1,5 +1,5 @@
 import { IPost, IAction } from "../../../types"
-import { HIDE_MODAL, SHOW_MODAL, ADD_POST, LOAD_POSTS, END_LOADING, START_LOADING } from "../../actions/variables"
+import { HIDE_MODAL, SHOW_MODAL, ADD_POST, LOAD_POSTS, END_LOADING, START_LOADING, } from "../../actions/variables"
 
 const initializeState = {
   posts: [] as IPost[],

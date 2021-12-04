@@ -8,8 +8,6 @@
 
 @import 'styles/formStyle.css';
 
-@import 'react-notifications-component/dist/theme.css';
-
 @layer components {
   .navBtn {
     @apply cursor-pointer h-6 transition-all duration-150 ease-out  w-6
@@ -22,7 +20,7 @@
   }
 
   .iconButton {
-    @apply h-7 w-7 cursor-pointer transition-all duration-150 ease-out
+    @apply h-7 w-7 cursor-pointer hover:opacity-60 transition-all duration-150 ease-out 
   }
 
   .borderG {
@@ -31,6 +29,12 @@
 
   .caption {
     @apply text-xs text-gray-500
+  }
+  .avatar_image {
+    @apply w-8 h-8 rounded-full object-cover
+  }
+  .avatar_img {
+    @apply w-8 h-8 rounded-full object-cover
   }
 
   .tooltip_red {
@@ -60,14 +64,14 @@
 
   .add_post_modal {
     @apply 
-    inline-block
+    block md:inline-block
       my-8 overflow-hidden 
     text-left align-middle transition-all 
     transform bg-white shadow-xl rounded-lg
   }
 
   .stories_bar {
-    @apply flex space-x-2 p-[16px] gap-[12px] bg-white mt-8 border-gray-300 border rounded-sm overflow-x-scroll scrollbar-thin scrollbar-thumb-black 
+    @apply flex space-x-2 p-[16px] gap-[12px] bg-white mt-5 md:mt-8 border-gray-300 border rounded-sm overflow-x-scroll scrollbar-thin scrollbar-thumb-black 
   }
 
   input::placeholder {
@@ -81,4 +85,43 @@
   .visibility-hidden {
     visibility: hidden
   }
+
+  .dropDownItem {
+    @apply px-4 py-2 hover:bg-gray-50 transition-all duration-200 cursor-pointer w-[230px] flex items-center gap-2
+  }
+
+  .submit_btn {
+    @apply flex text-sm items-center justify-center  transition-all duration-200 cursor-pointer px-3 py-1 
+    disabled:opacity-50  rounded-md bg-[#0095f6] text-white font-bold
+  }
+
+  .userSectionButtonLink {
+    @apply px-3 py-[4px] hover:bg-gray-100 transition-all duration-200 cursor-pointer font-semibold flex items-center justify-center  border text-[#262626] border-gray-400 rounded-md border-opacity-50
+  }
+
+  .profileChip {
+    @apply text-[#262626] text-[14px] font-sans py-1 px-2 rounded-2xl font-medium hover:bg-gray-50 transition-all duration-200 cursor-pointer
+  }
+
+  .editItem {
+    @apply bg-white cursor-pointer hover:bg-gray-50 transition-all pl-[28px] py-3 pr-3 duration-200 border-l-2 border-transparent hover:border-gray-300 text-gray-600
+  }
+
+  .editItem-plus {
+    @apply bg-white font-medium cursor-pointer hover:bg-gray-50 transition-all pl-[28px] py-3 pr-3 duration-200 border-l-2 text-[#262626] border-[#262626]
+  }
+
+  
+  .editItem-ink-plus {
+    @apply font-medium cursor-pointer hover:underline pl-[28px] py-3 pr-3 text-[#0095f6] 
+  }
+
+  .overlay {
+    @apply inset-0 z-10 cursor-pointer flex items-center justify-center absolute bg-black bg-opacity-50 opacity-0 hover:opacity-100 transition-all duration-200
+  }
+
+  .chatItem {
+    @apply flex gap-3 items-center h-[56px] px-[15px] cursor-pointer hover:bg-gray-50 transition-all duration-200
+  }
+ 
 }

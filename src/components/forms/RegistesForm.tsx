@@ -24,9 +24,9 @@ const RegisterForm:FC = () => {
   const formHandler = async (e:SyntheticEvent<HTMLFormElement>) => {
     e.preventDefault()
     const formData: userCreadentials = {
-      email: email.current.value,
-      password: password.current.value,
-      displayName: name.current.value,
+      email: email.current!.value,
+      password: password.current!.value,
+      displayName: name.current!.value,
       photoURL: 'https://iupac.org/wp-content/uploads/2018/05/default-avatar.png'
     }
     
@@ -55,11 +55,12 @@ const RegisterForm:FC = () => {
         </div>
 
           <div className="field">
-            <input
+            <input 
+              className='auth_input'
               ref={name}
               id="username"
               type="name"
-              placeholder="name"
+              placeholder=" "
             />
             <label htmlFor="username">Name</label>
           </div>
@@ -67,32 +68,33 @@ const RegisterForm:FC = () => {
           <div className="field">
 
             <input
-
+              className='auth_input'
               ref={email}
               id="username"
               type="email"
-              placeholder="Password"
+              placeholder=" "
             />
             <label htmlFor="username">Email</label>
           </div>
 
           <div className="field">
             <input
-              
+                className='auth_input'
               id="username"
               ref={password}
               type="name"
-              placeholder="password"
+              placeholder=" "
             />
             <label htmlFor="username">Password</label>
           </div>
 
           <div className="field">
             <input
+              className='auth_input'
               ref={address}
               id="username"
               type="name"
-              placeholder="address"
+              placeholder=" "
             />
             <label htmlFor="username">Address</label>
           </div>

@@ -21,6 +21,7 @@ export interface IComment {
   message: string
   timestamp: number
   postId: string
+  id: string
 }
 
 export interface ILike {
@@ -37,7 +38,9 @@ export interface IPost {
   username: string
   description: string
   likes: ILike[]
-  comments?: IComment[]
+  comments?: IComment[],
+  uid: string,
+  timestamp: number
 }
 
 export interface IUser {
@@ -45,7 +48,13 @@ export interface IUser {
   email: string
   photoURL: string
   username?: string
-  uid: string
+  uid: string,
+  webPage?: string,
+  bio?: string,
+  phoneNumber?: string
+  male?: string 
+  followers?: string[]
+  following?: string[]
 }
 
 export interface IAction {

@@ -1,19 +1,13 @@
-import React, { useRef, useState, ChangeEvent, useCallback } from 'react'
+import React, { useRef, ChangeEvent } from 'react'
 import { connect, useDispatch, useSelector } from 'react-redux'
 
-
-import { setNewPostImage, setNewCroppeDrawlerImage } from '../../../redux/actions/actions/drawlerActions'
-
-import { ArrowBackIcon } from '../../icons'
-
-import { addPost } from '../../../redux/actions/actions/postsActions'
-import { changeDrawlerConstroller } from '../../../redux/actions/generators'
+import { setNewPostImage } from '../../../redux/actions/actions/drawlerActions'
 
 import ModalIcon from '../../icons/ModalIcon'
 
 import ImageDrawler from '../../forms/ImageDrawler'
 
-import { IPost, IPostIMage } from '../../../types'
+import { IPostIMage } from '../../../types'
 
 const SelectPostImage = () => {
   const dispatch = useDispatch()
@@ -38,7 +32,7 @@ const SelectPostImage = () => {
     
      { !fileImage && (
       
-      <div className='p-[24px] flex-1 flex flex-col justify-center  h-[508px] w-[500px]  items-center gap-2'>
+      <div className='p-[24px] flex-1 flex flex-col justify-center  h-[508px] items-center gap-2'>
 
         <div>
          
@@ -59,7 +53,7 @@ const SelectPostImage = () => {
     ) }
 
     { !!(fileImage) && (
-      <div className='w-[500px]'>
+      <div className='max-w-[500px] w-full'>
 
       <ImageDrawler image={fileImage.img} key={fileImage.id} />
       </div> )

@@ -11,12 +11,12 @@ const AuthForm:FC = () => {
   const dispatch = useDispatch()
   const isAuthemteficating = useSelector((state: any) => state.user.isAuth)
 
-  const email = useRef(null)
-  const password = useRef(null)
+  const email = useRef<HTMLInputElement>(null)
+  const password = useRef<HTMLInputElement>(null)
  
   const submitHandler = (e: SyntheticEvent<HTMLFormElement>) => {
     e.preventDefault()
-    dispatch(signin({email: email.current!.value, password: password.current.value}))
+    dispatch(signin({email: email.current!.value, password: password.current!.value}))
   }
 
   const authWithFacebook = () => {
@@ -31,19 +31,23 @@ const AuthForm:FC = () => {
         <form onSubmit={submitHandler.bind(null)} className="login-form">
           <div className="field">
             <input
+            className='auth_input'
               ref={email}
               id="username"
               type="name"
-              placeholder="Email"
+              placeholder=' '
+             
             />
             <label htmlFor="username">Email</label>
           </div>
           <div className="field">
             <input
+              className='auth_input'
               ref={password}
+              placeholder=' '
              id="password"
              type="password"
-             placeholder="password" />
+            />
             <label htmlFor="password">Password</label>
           </div>
             <button className="login-button disabled:opacity-50" disabled={isAuthemteficating} title="login">Log In</button>

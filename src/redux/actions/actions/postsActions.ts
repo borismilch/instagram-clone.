@@ -61,10 +61,9 @@ export const fetchPosts = (posts: any[] = [])  => {
 
 }
 
-
 export const addComent = (comment: IComment) => {
   return async (dispatch: IDispatch) => {
-    const commentRef = collection(db, 'posts', comment.postId, 'comments')
-    await addDoc(commentRef, comment)
+    const commentRef = doc(collection(db, 'posts', comment.postId, 'comments'))
+    await setDoc(commentRef, {...comment, id:commentRef.id})
   }
 }

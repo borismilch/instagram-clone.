@@ -1,16 +1,24 @@
-import React from 'react'
+import React, { useState } from 'react'
 
 import { connect, useDispatch, useSelector } from 'react-redux'
 
 import { showModal } from '../../redux/actions/generators'
 
-import { HomeFilled, HomeIcon, MessageIcon, MessaagesFilled, CompasIcon, CompasFilled, AddIcon, HeartIcon  } from '../icons'
+import { HomeFilled, HomeIcon, CompasIcon, CompasFilled, AddIcon, HeartIcon  } from '../icons'
 
 import { Link } from 'react-router-dom'
 
 import { useHistory, useLocation } from 'react-router'
 
+import ProfileDropdown from '../forms/ProfileDropdown'
+
 const HeaderFooter = () => {
+
+  const [dropdown, setDropdown] = useState(false)
+
+  const changeDropdown = (val: boolean) => {
+    setDropdown(val)
+  }
  
   const showModalVindow = () => {
     dispatch(showModal())
@@ -21,10 +29,6 @@ const HeaderFooter = () => {
   const router = useHistory()
   const location = useLocation()
   const user = useSelector((state: any) => state.user.user)
-
-  const userSignOut = async () => {
-    router.push('/auth/signin')
-  }
 
   return (
     <>
@@ -59,10 +63,15 @@ const HeaderFooter = () => {
             <HeartIcon />
             </div>
 
-            <div className=''>
+            <div onClick={() => changeDropdown(!dropdown)}>
             { user && (
               <>
-              <img src={user.photoURL} onClick={() => userSignOut()} className='w-8 h-8 rounded-full' alt="" />  
+              <img src={user.photoURL} className='w-8 h-8 rounded-full object-cover' alt="" />  
+
+             { dropdown && <div className='absolute top-[30px] right-0 '>
+                <ProfileDropdown down={true} />
+              </div>}
+           
             </>
              )}
             </div>

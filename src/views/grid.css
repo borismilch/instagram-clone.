@@ -1,0 +1,29 @@
+.post_grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: auto;
+}
+
+.post_ig:nth-child(2) {
+  grid-column-start: 2;
+  grid-column-end: 4;
+  grid-row-start: 1;
+  grid-row-end: 3;
+}
+
+.camera_icon {
+  background-image: url('https://www.instagram.com/static/bundles/es6/sprite_glyphs_2x_77929eccc37e.png/77929eccc37e.png');
+  background-repeat: no-repeat;
+  height: 24px;
+  width: 24px;
+  background-size: 569px 521px;
+  background-position: -252px -426px;
+
+}
+
+.recomends_container {
+  flex-grow: 1;
+  margin: 0 auto;
+  max-width: 600px;
+  width: 100%;
+}

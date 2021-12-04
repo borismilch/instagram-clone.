@@ -12,9 +12,6 @@ import EmojiPicker from '../../../forms/emojiicker'
 
 import { clearNewPostImages, clearCroppedNewPostImages, cahngeStepOfPostModal,   } from '../../../../redux/actions/actions/drawlerActions'  
 
-
-import { Picker } from 'emoji-mart'
-
 import { Smile } from '../../../icons'
 
 import 'emoji-mart/css/emoji-mart.css'
@@ -64,7 +61,8 @@ const ConfigForm = () => {
       userName: user.displayName,
       message: decription,
       timestamp: Date.now(),
-      postId: ''
+      postId: '',
+      id: ''
     }
 
     const postData: IPost  = {
@@ -74,7 +72,9 @@ const ConfigForm = () => {
       userImg: user.photoURL,
       description: '',
       likes: [],
-      comments: [firstComment]
+      uid: user.uid,
+      comments: [firstComment],
+      timestamp: Date.now()
     }
 
     console.log(postData)

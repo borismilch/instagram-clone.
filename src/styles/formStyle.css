@@ -53,13 +53,14 @@ a {
   text-overflow: ellipsis;
 }
 
-input {
+.auth_input {
   padding: 9px 0px 7px 9px !important;
   font-size: 12px;
   width: 16rem;
   outline: none;
   background: #fafafa;
   border-radius: 3px;
+
   border: 1px solid #efefef;
 }
 
@@ -80,7 +81,7 @@ label {
 
 /* hiding placeholder in all browsers */
 
-input::placeholder {
+.auth_input::placeholder {
   visibility: hidden;
 }
 
@@ -90,13 +91,13 @@ input::placeholder {
 }
 
 /* label final position */
-input:not(:placeholder-shown) + label {
+.auth_input:not(:placeholder-shown) + label {
   transform: translateY(0);
   font-size: 11px;
 }
 
 /* input padding increases if placeholder is not shown */
-input:not(:placeholder-shown) {
+.auth_input:not(:placeholder-shown) {
   padding-top: 14px;
   padding-bottom: 2px;
 }

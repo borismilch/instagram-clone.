@@ -1,4 +1,4 @@
-import React, {FC} from 'react'
+import React, { useState } from 'react'
 
 import { connect, useDispatch, useSelector } from 'react-redux'
 
@@ -13,7 +13,11 @@ import { SearchIcon } from '@heroicons/react/outline'
 
 import { Link } from 'react-router-dom'
 
-const Header:FC = () => {
+import ProfileDropdown from '../forms/ProfileDropdown'
+
+const Header:React.FC = () => {
+
+  const [dropdown, setDropdown] = useState(false)
 
   const showModalVindow = () => {
     dispatch(showModal())
@@ -25,21 +29,21 @@ const Header:FC = () => {
   const location = useLocation()
   const user = useSelector((state: any) => state.user.user)
 
-  const userSignOut = async () => {
-    router.push('/auth/signin')
+  const changeDropDown = (val: boolean) => {
+    setDropdown(val)
   }
 
   return (
     <>
-     <div className='h-16' />
-    <header className='bg-white top-0 border-b shadow-sm z-50  px-4 fixed w-full' > 
-    <div className='justify-between flex items-center mx-auto' style={{maxWidth: 975}}>
+     <div className=' h-12 lg:h-16' />
+    <header className='bg-white top-0 border-b shadow-sm z-50 h-[54px] fixed w-full' > 
+    <div className='justify-between flex items-center mx-auto px-[20px]' style={{maxWidth: 975}}>
 
-      <div className=" relative h-8 w-24">
+      <div className=" relative w-24">
 
         <img 
           onClick={() => router.push('/')}
-          className='cursor-pointer '
+          className='cursor-pointer object-cover'
           src={Logo} 
         />
 
@@ -50,14 +54,14 @@ const Header:FC = () => {
         <SearchIcon className='w-5 h-5 text-gray-500' />
       </div>
       <input type="text" placeholder='Search' 
-        className='header_input flex-shrink' 
+        className='header_input flex-shrink h-[28px]' 
       
       />
     </div>
     
     <div className='flex gap-3 items-center justify-end'>
 
-      <div className='gap-4 items-center justify-end flex'>
+      <div className='gap-5  items-center justify-end flex'>
         <Link to='/' className='navBtn smd'>
         { location.pathname === '/' ? <HomeFilled/> : <HomeIcon />}
         </Link>
@@ -96,7 +100,14 @@ const Header:FC = () => {
 
      { user && (
         <>
-          <img src={user.photoURL} onClick={() => userSignOut()} className='w-8 h-8 rounded-full smd' alt="" />  
+          <img src={user.photoURL} onClick={() => changeDropDown(!dropdown)} className='w-7 h-7 hover:border border-gray-800 cursor-pointer  rounded-full smd' alt="" />  
+
+        { dropdown &&
+            <div className='relative' onClick={() => changeDropDown(false)}>
+              <ProfileDropdown down={false} />
+            </div>
+        }
+         
         </>
      )}
     </div>

@@ -21,3 +21,8 @@ export { default as HomeIcon } from './header/Home'
 export { default as HomeFilled } from './header/HomeFillled'
 export { default as MessageIcon } from './header/MessagesIcon'
 export { default as MessaagesFilled } from './header/MessagesFiled'
+
+export { default as BookmarkSmall } from './dropdown/BokmarkSmall'
+export { default as Arrows } from './dropdown/Arrows'
+export { default as SettingsIcon } from './dropdown/SettingsIocn'
+export { default as PorfileIcon } from './dropdown/ProfileIcons'

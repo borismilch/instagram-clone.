@@ -62,3 +62,9 @@
     display: inline-flex !important;
   }
 }
+
+@media (max-width: 996px) {
+  span.inline-block.h-screen.align-middle {
+    height: 0px;
+  }
+}

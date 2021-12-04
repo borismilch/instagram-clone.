@@ -7,7 +7,8 @@ const initializeState = {
   newPostImage: null as null | IPostIMage,
   croppedNewPostImage: null as null | IPostIMage,
   drawlerController: false,
-  stepOfModal: 0
+  stepOfModal: 0,
+  
 }
 
 export const drawlerReducer = (state = initializeState, action: IAction) => {

@@ -1,0 +1,44 @@
+.post_bookMark {
+  background-image: url('https://www.instagram.com/static/bundles/es6/sprite_core_2x_bcd90c1d4868.png/bcd90c1d4868.png');
+  height: 62px;
+  width: 62px;
+  background-repeat: no-repeat;
+  background-size: 440px 411px;
+  background-position: -126px -288px;
+}
+
+.my_grid {
+  grid-gap: 28px;
+  display: grid;
+  grid-template-rows: 1fr;
+  grid-template-columns: 1fr 1fr 1fr;
+}
+
+@media (max-width: 764px) {
+  .my_grid {
+    grid-gap: 6px;
+    display: grid;
+    grid-template-rows: 1fr;
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+}
+
+@media (max-width: 564px) {
+  .my_grid {
+    grid-gap: 6px;
+    display: grid;
+    grid-template-rows: minmax(100px, 230px);
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+}
+
+.chat_icon {
+  background-size: 440px 411px;
+  background-position: -382px -263px;
+  background-image: url('https://www.instagram.com/static/bundles/es6/sprite_core_2x_bcd90c1d4868.png/bcd90c1d4868.png');
+  height: 19px;
+  width: 19px;
+  background-repeat: no-repeat;
+  margin-right: 7px;
+
+}

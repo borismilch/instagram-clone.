@@ -5,6 +5,8 @@ import PostForm from './post/PostForm'
 
 import PostHeader from './post/PostHeader'
 
+import { KeepAlive } from 'react-keep-alive'
+
 import PostSkeleton from './post/PostSkeleton'
 
 import LikeAnimation from '../pure/LikeAnimation'
@@ -16,12 +18,12 @@ import { useSelector } from 'react-redux'
 import { onSnapshot, query, collection, orderBy, setDoc, doc, serverTimestamp, deleteDoc, DocumentData } from '@firebase/firestore'
 
 const Post: React.FC<{post: IPost}> = ({post}) => {
-
   const user = useSelector((state: any) => state.user.user)
 
   const [comments, setCommetns] = useState<DocumentData[]>([])
   const [liked, setLiked] = useState(false)
   const [likes, setLikes] = useState<DocumentData[]>([])
+
 
   useEffect(() => 
     onSnapshot(
@@ -29,7 +31,7 @@ const Post: React.FC<{post: IPost}> = ({post}) => {
         collection(db, 'posts', post.id, 'comments'),
         orderBy("timestamp", 'desc')
       ),
-      (snapshot) => setCommetns(snapshot.docs)
+      (snapshot) =>  {setCommetns(snapshot.docs)}
     )
   , [db, post.id])
 
@@ -76,7 +78,7 @@ const Post: React.FC<{post: IPost}> = ({post}) => {
  
   return (
     <div className='mb-5'>
-        
+      
     <div className={ imageLoaded ? 'opacity-100 relative' : 'opacity-0 absolute'}>
       <PostHeader userImg={post.userImg} username={post.username} />
 
@@ -86,13 +88,12 @@ const Post: React.FC<{post: IPost}> = ({post}) => {
       </div>
     
 
-      <PostFooter likes={likes} liked={liked} comments={comments} likePost={likePost} >
+      <PostFooter post={post} likes={likes} liked={liked} comments={comments} likePost={likePost} >
+        <div className='mt-6'>
         <PostForm id={post.id} />
+        </div>
       </PostFooter>
     </div>  
-
-    { !imageLoaded && <PostSkeleton /> }
-
     </div>
   )
 }

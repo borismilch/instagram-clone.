@@ -1,5 +1,5 @@
 import { IAlert, IComment, IDispatch, IPost, IUser, userCreadentials } from '../../../types'
-import { startLoading, endLoading, loadPosts, hideModal, setUser,deleteUser, setAuthtoTrue, setAuthToFalse } from '../generators'
+import { startLoading, endLoading, loadPosts, hideModal, setUser,deleteUser, setAuthtoTrue, setAuthToFalse, setLoadingUpdatingToTrue, setLoadingUpdatingToFalse } from '../generators'
 import {signInWithEmailAndPassword, createUserWithEmailAndPassword, signOut, signInWithRedirect, getRedirectResult} from 'firebase/auth'
 import { SHOW_ALERT, HIDE_ALERT } from '../variables'
 
@@ -9,10 +9,8 @@ import { alerts } from '../../../utils/alerts'
 
 import { push } from 'connected-react-router'
 
-import { doc, collection, setDoc, getDocs, addDoc, getDoc } from 'firebase/firestore'
+import { doc, collection, setDoc, getDocs, addDoc, getDoc, updateDoc } from 'firebase/firestore'
 import { ref, uploadString, getDownloadURL } from 'firebase/storage'
-
-
 
 export const createNewUser = (credentials: userCreadentials) => {
 
@@ -75,23 +73,54 @@ export const readiedSignIn = <T extends IUser>(user: T) => {
 
   return async (dispatch: IDispatch) => {
     dispatch(setAuthtoTrue())
-    console.log(user)
+    
+    const databaseUserRef = doc(db, 'users', user.uid)
+    const databaseUser = getDoc(databaseUserRef)
+
+    if (!(await databaseUser).exists()) {
+      await setDoc(databaseUserRef, user)
+    }
+
     try { 
-      dispatch(setUser(user))
+      dispatch(setUser({...user, ...(await databaseUser).data()}))
 
       dispatch(push('/'))
 
       dispatch(setAuthToFalse())
-
-      dispatch(callAlert('user_singed_in'))
     }
-    catch (e: any) {
-      dispatch(setAuthToFalse())
-      dispatch(callAlert(e.code))
-    }
+    catch (e: any) { dispatch(setAuthToFalse()) }
   }
  
 } 
+
+export const updateUser = (user: any) => {
+  return async (dispatch: IDispatch, getState: () => any) => {
+    dispatch(setLoadingUpdatingToTrue())
+
+    if (getState().user.user.photoURL !== user.photoURL) {
+      const storageRef = ref(storage, `users/${user.uid}`)
+
+      await uploadString(storageRef, user.photoURL, 'data_url')
+
+      const downloadURL = await getDownloadURL(storageRef)
+
+      user = { ...user, photoURL: downloadURL }
+    }
+
+    console.log(getState().user.user.photoURL, user.photoURL )
+
+    const userRef = doc(db, 'users', getState().user.user.uid)
+    await updateDoc(userRef, { ...user })
+
+    const userDoc = (await getDoc(userRef)).data()
+
+    dispatch(setUser(userDoc!))
+
+    dispatch(setLoadingUpdatingToFalse())
+
+    dispatch(push('/profile'))
+  }
+}
 
 
 export const singOutUser = () => {
