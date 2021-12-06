@@ -16,10 +16,10 @@ const RegisterForm:FC = () => {
 
   const dipatch = useDispatch()
 
-  const email = useRef(null)
-  const password = useRef(null)
-  const name = useRef(null)
-  const address = useRef(null)
+  const email = useRef<HTMLInputElement>(null)
+  const password = useRef<HTMLInputElement>(null)
+  const name = useRef<HTMLInputElement>(null)
+  const address = useRef<HTMLInputElement>(null)
 
   const formHandler = async (e:SyntheticEvent<HTMLFormElement>) => {
     e.preventDefault()

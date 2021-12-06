@@ -9,7 +9,7 @@ import { collection, onSnapshot } from '@firebase/firestore'
 
 import { db } from '../../../../firebase'
 
-import { setAllUsers } from '../../../redux/actions/generators'
+import { setAllUsers } from '../../../redux/actions/creators'
 
 const Stories: FC = () => {
 
@@ -36,26 +36,22 @@ const Stories: FC = () => {
   const filteredProfiles: IUser[] = [user,
      ...(suggestions.map(p => p.data()).filter(s => s.uid !== user.uid))
   ]
-    console.log(filteredProfiles)
-
 
   return (
     <div className='stories_bar overflow-y-hidden relative'>
 
 
-    { (suggestions.length / 2 >= loadeds.length ) && <StoriesLoader />}
+    { (suggestions.length !== loadeds.length ) && <StoriesLoader />}
 
     {
     
-     <div className={ 'flex gap-4 ' +  ((suggestions.length / 2 <= loadeds.length) ?  'opacity-100 ' : 'opacity-0 overflow-hidden')}>
+     <div className={ 'flex gap-4 opacity-0 ' +  ((suggestions.length  <= loadeds.length) ?  'opacity-100 ' : 'opacity-0 overflow-hidden')}>
 
       { 
-        filteredProfiles.map(profile => (
+        filteredProfiles[0] && filteredProfiles.map(profile => (
          
-          <Story onImageLoaded={onImageLoaded} key={profile.uid} profile={profile} /> 
+          <Story onImageLoaded={onImageLoaded} key={profile?.uid} profile={profile} /> 
         
-          
-
         )) 
       }
 

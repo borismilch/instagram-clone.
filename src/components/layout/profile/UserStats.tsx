@@ -5,8 +5,10 @@ import GearIcon from '../../icons/GearIcon'
 import { useHistory } from 'react-router-dom'
 
 import { Link } from 'react-router-dom'
-import { collection, DocumentData, getDocs, onSnapshot } from '@firebase/firestore'
+import { collection, deleteDoc, doc, DocumentData, getDocs, onSnapshot, setDoc } from '@firebase/firestore'
 import { db } from '../../../../firebase'
+
+import './profileStats.css'
 
 const UserStats:React.FC<{user: IUser}> = ({user}) => {
 
@@ -15,6 +17,10 @@ const UserStats:React.FC<{user: IUser}> = ({user}) => {
   const posts: IPost[] = useSelector((state:any) => state.posts.posts)
   const userPosts = posts.filter(p => p.uid === user.uid)
   const [following, stFollowing] = useState<DocumentData[]>([])  
+
+  const [isfollowing, setIsFolllowing] = useState(false)
+
+  const currentUser = useSelector((state: any) => state.user.user)
  
   useEffect(() => {
     
@@ -34,6 +40,29 @@ const UserStats:React.FC<{user: IUser}> = ({user}) => {
     )
   }, [db, user.uid])
 
+  useEffect(() => {
+    const subscriptionRef = doc(db, 'users', currentUser.uid, 'followers', user.uid)
+   
+    onSnapshot(
+      subscriptionRef,
+      (snapshot) =>  {setIsFolllowing(snapshot.exists()); console.log('followeed', snapshot.exists()) }
+    )
+
+  }, [db, user.uid])
+
+  const follow = async () => {
+    const subscriptionRef = doc(db, 'users', currentUser.uid, 'followers', user.uid) 
+    const follewRef = doc(db, 'users', user.uid, 'following', currentUser.uid) 
+    if (isfollowing) {
+      await deleteDoc(subscriptionRef)
+      await deleteDoc(follewRef)
+    }
+    else {
+      await setDoc(subscriptionRef, {id: user.uid, ...user})
+      await setDoc(follewRef, {id: currentUser.uid, currentUser})
+    } 
+  }
+
 
   const history = useHistory()
 
@@ -41,32 +70,78 @@ const UserStats:React.FC<{user: IUser}> = ({user}) => {
     <>
     <div className='flex  md:gap-[30px] w-full'>
 
-      <div className='flex items-center justify-center h-[77px] md:h-[150px] ' style={{flex: '0  0 30%'}}>
-        <img src={user.photoURL} className='md:w-[150px] w-[77px] h-[77px] md:h-[150px] object-cover rounded-full' alt='dd' />
+      <div style={{flex: '0  0 30%'}}>
+
+        <div className="circle relative flex">
+          <div className='flex w-full items-end justify-center h-[77px] md:h-[150px] '>
+          <img src={user.photoURL} className='md:w-[150px] ml-auto w-[77px] h-[77px] md:h-[150px] object-cover rounded-full' alt='dd' />
+          </div>
+       
+
+        <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">  
+          <circle cx="50" cy="50" r="40" />
+        </svg>
+
+        </div>
+
       </div>
     
       <div className='flex flex-1 flex-col'>
 
+       
         <div className='flex gap-5 items-center justify-center md:justify-start mb-[20px]'>
 
           <h2 className='font-light text-[28px] text-[#262626] truncate' style={{ margin: '-5px 0 -6px' }}>
             { '@' + user.displayName.split(' ').join('') }
           </h2>
-
-          <Link to='/accounts/edit' className='userSectionButtonLink text-sm smd'>
+         { currentUser.uidr === user.uid  ?  (
+          <>
+           <Link to='/accounts/edit' className='userSectionButtonLink text-sm smd'>
             Редактиров профиль
           </Link>
 
           <div onClick={() => history.push('accounts/edit')}>
             <GearIcon />
           </div>
+
+          </>
         
-        </div>
+       ) : 
+       (
+        <>
+          { !isfollowing ?
+
+            <button onClick={() => follow()}  className='userSectionButtonLink border-1 bg-[#0095f6] px-7 py-1 border-[#0095f6] text-white hover:opacity-80 hover:bg-[#0095f6] cursor-pointer font-bold rounded-md text-base smd'>
+              Підписатись
+            </button>
+            :
+            <button onClick={follow.bind(null)}  className='userSectionButtonLink   px-7 py-1 border-1 border-gray-500   hover:opacity-80  cursor-pointer  rounded-md text-base smd'>
+             Відписатись
+            </button>
+
+          }
+        </>
+       )
+        }
+         </div>
 
         
-        <Link to='/accounts/edit' className='userSectionButtonLink text-sm sml'>
+      { currentUser.uid === user.uid &&  <Link to='/accounts/edit' className='userSectionButtonLink text-sm sml'>
             Редактиров профиль
-        </Link>
+        </Link>}
+
+        { !isfollowing ?
+
+          <button onClick={follow.bind(null)}  className='userSectionButtonLink mx-8 border-1 bg-[#0095f6] px-7 py-1 border-[#0095f6] text-white hover:opacity-80 hover:bg-[#0095f6] cursor-pointer font-bold rounded-md text-base sml'>
+            Підписатись
+          </button>
+          :
+          <button onClick={follow.bind(null)}  className='userSectionButtonLink mx-8  px-7 py-1 border-1 border-gray-500   hover:opacity-80  cursor-pointer  rounded-md text-base sml'>
+          Відписатись
+          </button>
+
+        }
+
 
         <div className='flex items-center gap-8 smd'>
             <p className='profileChip'>
@@ -103,7 +178,7 @@ const UserStats:React.FC<{user: IUser}> = ({user}) => {
 
        
       <div className='flex flex-col'>
-        <span className='font-bold'>0</span>
+        <span className='font-bold'> {following.length}</span>
         <p>Підписників</p>
       </div>
        

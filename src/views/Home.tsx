@@ -5,16 +5,15 @@ import Posts from '../components/items/lists/Posts'
 import Suggestions from '../components/items/lists/Suggestions'
 import MiniProfile from '../components/layout/home/MiniProfile'
 
-import { setAllUsers, setUserFollowers, setUserFollowing } from '../redux/actions/generators'
+import { setAllUsers, setUserFollowers, setUserFollowing } from '../redux/actions/creators'
 
 import { connect, useSelector, useDispatch} from 'react-redux'
 
-import { loadApp, unloadApp } from '../redux/actions/generators'
+import { loadApp, unloadApp } from '../redux/actions/creators'
 
 import { fetchPosts } from '../redux/actions/actions/postsActions'
 import { IPost, IUser } from '../types'
 
-import { Redirect } from 'react-router-dom'
 import { db } from '../../firebase'
 import { collection, onSnapshot } from '@firebase/firestore'
 
@@ -28,8 +27,6 @@ const Home: FC = () => {
 
   const user: IUser = useSelector((state: any) => state.user.user)
   const omlyId = followers.map(f => f.id)
-
-  if(!user) { return <Redirect to='auth/signin' /> }
 
   useEffect(() => {
     dispatch(loadApp())
@@ -46,13 +43,12 @@ const Home: FC = () => {
 
 
   useEffect(() => {
-    const followerssRef = collection(db, 'users', user.uid, 'followers')
-    const followingRef = collection(db, 'users', user.uid, 'following')
+    const followerssRef = collection(db, 'users', user?.uid, 'followers')
+    const followingRef = collection(db, 'users', user?.uid, 'following')
 
     onSnapshot(followerssRef, (span) => {
     
       const follower = span.docs.map(d => d.data())
-      console.log(follower, 'sslls')
 
       dispatch(setUserFollowers(follower))
     
@@ -60,9 +56,11 @@ const Home: FC = () => {
     })
 
     onSnapshot(followingRef, (span) => {dispatch(setUserFollowing(span.docs.map(d => d.data())))})
-  }, [db, user.uid])
+  }, [db, user])
 
   const sortedPosts = [...posts].sort((a, b) => +a.timestamp - +b.timestamp).filter(p => omlyId.includes(p.uid))
+
+  if (!user) { return <div /> }
 
   return (
     <>
@@ -77,17 +75,21 @@ const Home: FC = () => {
         <div className='mb-[12px] md:mb-[24px]'> <Stories /> </div>
         
           
-          { <Posts posts={sortedPosts} /> }
+          { <Posts /> }
           
         </div>
         {
           user &&
 
           <section className='md:col-span-1 smdxl relative flex fex-col '>
-            <div className='fixed top-20'>
-            <MiniProfile user={user!} />
-            <Suggestions />
-          </div>
+           {
+             user && ( 
+             <div className='fixed top-20'>
+               <MiniProfile user={user!} />
+               <Suggestions />
+             </div>
+           )
+           }
           
           </section>
         }

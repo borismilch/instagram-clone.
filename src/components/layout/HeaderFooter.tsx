@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 
 import { connect, useDispatch, useSelector } from 'react-redux'
 
-import { showModal } from '../../redux/actions/generators'
+import { showModal } from '../../redux/actions/creators'
 
 import { HomeFilled, HomeIcon, CompasIcon, CompasFilled, AddIcon, HeartIcon  } from '../icons'
 

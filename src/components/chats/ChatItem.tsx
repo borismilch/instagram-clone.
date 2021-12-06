@@ -1,15 +1,26 @@
 import React from 'react'
 import { IUser } from '../../types'
 
-const ChatItem:React.FC<{user: IUser}> = ({user}) => {
-  return (
-    <div className='chatItem'>
+import { connect, useDispatch, useSelector } from 'react-redux'
+import { changeSelectedChat } from '../../redux/actions/creators'
 
-      <img src={user.photoURL} className='w-[52px] h-[52px] rounded-full object-cover' alt="" />
+const ChatItem:React.FC<{user: IUser}> = ({user}) => {
+
+  const dispatch = useDispatch()
+  const selected = useSelector((state: any) => state.chat.selectedChat)
+
+  const selectThisItem = () => {
+    dispatch(changeSelectedChat(user.uid))
+  }
+
+  return (
+    <div onClick={selectThisItem.bind(null)} className={'chatItem py-[8px] ' + (selected === user.uid ? 'bg-gray-50' : '') }>
+
+      <img src={user.photoURL} className='w-[54px] h-[54px] rounded-full object-cover' alt="" />
 
       <div className='flex flex-col'>
 
-        <h1 className='text-[#262626] font-light'>
+        <h1 className='text-[#262626] font-semibold'>
           {user.displayName}
         </h1>
 
@@ -22,4 +33,4 @@ const ChatItem:React.FC<{user: IUser}> = ({user}) => {
   )
 }
 
-export default ChatItem
+export default connect()(ChatItem)

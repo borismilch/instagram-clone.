@@ -5,7 +5,7 @@ import ModalLayout from '../ModalLayout'
 
 import { connect,  useDispatch, useSelector } from 'react-redux'
 
-import { hideModal } from '../../../redux/actions/generators'
+import { hideModal } from '../../../redux/actions/creators'
 
 import { changeConfirmDrawlerModal } from '../../../redux/actions/actions/drawlerActions'
 
@@ -34,7 +34,7 @@ const  ConfirmDrawlerCodal:React.FC = () => {
       closeModal={closeModal} isOpen={isOpen}
     >
 
-      <div className="inline-block w-full max-w-md  my-8 overflow-hidden text-left align-middle transition-all transform bg-white shadow-xl rounded-2xl">
+      <div className="small_modal">
 
       <div className="m-[32px] flex flex-col text-center">
 

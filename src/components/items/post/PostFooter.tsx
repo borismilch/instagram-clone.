@@ -5,7 +5,7 @@ import Comment from '../Commnet'
 import { FilledHeart, HeartIcon, PaperFlyIcon, ChatIcon, BooKMarkIcon, BooKMarkFilled } from '../../icons'
 import { DocumentData } from '@firebase/firestore'
 import { useDispatch } from 'react-redux'
-import { openPostDetailModal, selectPostDetailModalPost } from '../../../redux/actions/generators'
+import { openPostDetailModal, selectPostDetailModalPost } from '../../../redux/actions/creators'
 import { IPost } from '../../../types'
 
 const PostFooter: React.FC<

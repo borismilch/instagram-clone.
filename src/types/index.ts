@@ -1,3 +1,4 @@
+import { FieldValue } from "@firebase/firestore";
 
 export interface IProfile {
   address?: any
@@ -22,6 +23,11 @@ export interface IComment {
   timestamp: number
   postId: string
   id: string
+}
+
+export interface IRoute {
+  path: string
+  component: Element
 }
 
 export interface ILike {
@@ -89,4 +95,13 @@ export interface IDropItem {
 export interface IPostIMage {
   img: string
   id: number | string
+}
+
+export interface IMessage {
+  content: string,
+  timeStamp: FieldValue,
+  userId: string,
+  userImg: string,
+  userName: string,
+  type: string
 }

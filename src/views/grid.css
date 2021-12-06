@@ -27,3 +27,33 @@
   max-width: 600px;
   width: 100%;
 }
+
+.circle{
+  position:relative;
+  width:100px;
+  height:100px;
+ 
+}
+
+.circle svg{
+  fill:none;
+  stroke:#8a3ab9;
+  stroke-linecap: round;
+  stroke-width:3;
+  stroke-dasharray: 1;
+  stroke-dashoffset: 0;
+  animation: stroke-draw 6s ease-out 1 forwards; 
+
+}
+
+@keyframes stroke-draw {
+  from{
+    stroke:#8a3ab9;
+    stroke-dasharray: 1;
+  }
+  to{
+    stroke:#cd486b;
+    transform:rotate(180deg);
+    stroke-dasharray: 8;
+  }
+}

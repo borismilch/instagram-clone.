@@ -26,7 +26,6 @@ const PostForm: React.FC<{id: string, fn?: () => void}> = ({id, fn}) => {
   }
 
   const setEmoji = (emoji: any) => {
-    console.log(emoji)
     setComment(prev => prev + emoji.native)
   }
 
@@ -53,7 +52,6 @@ const PostForm: React.FC<{id: string, fn?: () => void}> = ({id, fn}) => {
     dispatch(addComent(formData))
     fn && fn()
   
-
     setComment('')
     
   }
@@ -70,7 +68,6 @@ const PostForm: React.FC<{id: string, fn?: () => void}> = ({id, fn}) => {
        <EmojiPicker addEmoji={setEmoji} showEmoji={showEmoji} />
       </div>
      
-
       <input 
         type="text" 
         value={comment}

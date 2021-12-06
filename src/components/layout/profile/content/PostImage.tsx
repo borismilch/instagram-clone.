@@ -7,7 +7,7 @@ import Skeleton from 'react-loading-skeleton'
 import { connect, useSelector, useDispatch } from 'react-redux'
 
 import { db } from '../../../../../firebase'
-import { openPostDetailModal, selectPostDetailModalPost } from '../../../../redux/actions/generators'
+import { openPostDetailModal, selectPostDetailModalPost } from '../../../../redux/actions/creators'
 
 import { IPost } from '../../../../types'
 

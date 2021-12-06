@@ -1,5 +1,5 @@
 import { IAlert, IComment, IDispatch, IPost, IUser, userCreadentials } from '../../../types'
-import { startLoading, endLoading, loadPosts, hideModal, setUser,deleteUser, setAuthtoTrue, setAuthToFalse, setLoadingUpdatingToTrue, setLoadingUpdatingToFalse } from '../generators'
+import { startLoading, endLoading, loadPosts, hideModal, setUser,deleteUser, setAuthtoTrue, setAuthToFalse, setLoadingUpdatingToTrue, setLoadingUpdatingToFalse } from '../creators'
 import {signInWithEmailAndPassword, createUserWithEmailAndPassword, signOut, signInWithRedirect, getRedirectResult} from 'firebase/auth'
 import { SHOW_ALERT, HIDE_ALERT } from '../variables'
 

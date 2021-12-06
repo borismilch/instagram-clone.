@@ -26,3 +26,5 @@ export { default as BookmarkSmall } from './dropdown/BokmarkSmall'
 export { default as Arrows } from './dropdown/Arrows'
 export { default as SettingsIcon } from './dropdown/SettingsIocn'
 export { default as PorfileIcon } from './dropdown/ProfileIcons'
+
+export { default as InfoIcon } from './infoIcon'

@@ -1,11 +1,11 @@
 import React from 'react'
 import { connect, useDispatch, useSelector } from 'react-redux'
 
-import { hideModal } from '../../redux/actions/generators'
+import { hideModal } from '../../redux/actions/creators'
 
 import ModalLayout from './ModalLayout'
 
-import { changeDrawlerConstroller } from '../../redux/actions/generators'
+import { changeDrawlerConstroller } from '../../redux/actions/creators'
 
 import ConfirmModal from './drawler/ConfirmModal'
 import { changeConfirmDrawlerModal } from '../../redux/actions/actions/drawlerActions'

@@ -9,13 +9,12 @@ import ProfileFooter from '../components/layout/profile/content/ProfileFooter'
 
 import { useLocation } from 'react-router'
 import { useSelector } from 'react-redux'
+
 import { IUser } from '../types'
 
 const OtherPorofile = () => {
   const location = useLocation()
   const uid: string = location.pathname.split('/')[2]
-
-  console.log(location)
 
   const current:IUser = useSelector((state: any) => state.user.users.find((p: IUser) => p.uid === uid))
  

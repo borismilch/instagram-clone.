@@ -1,9 +1,13 @@
 import React, {Suspense, lazy} from 'react'
 
 import Header from './Header'
+import StoriesLoader from './home/loaders/StoriesLoader'
 import HeaderFooter from './HeaderFooter'
 
 const AddPostModal = lazy(() => import('./AddPostModal')) 
+const InterestionModal = lazy(() => import('../modals/InterectionsModal'))
+
+
 
 const MainLayout:React.FC = ({children}) => {
   return (
@@ -16,9 +20,12 @@ const MainLayout:React.FC = ({children}) => {
     
     <HeaderFooter />
 
-    <Suspense fallback={<div className='opacity-0' />}>
+    <Suspense fallback={<StoriesLoader />}>
       <AddPostModal /> 
     </Suspense>
+
+      
+    
 
    
     </>

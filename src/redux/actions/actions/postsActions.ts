@@ -1,5 +1,5 @@
 import { IComment, IDispatch, IPost } from '../../../types'
-import { startLoading, endLoading, loadPosts, hideModal } from '../generators'
+import { startLoading, endLoading, loadPosts, hideModal } from '../creators'
 
 
 import { db, storage } from '../../../../firebase'

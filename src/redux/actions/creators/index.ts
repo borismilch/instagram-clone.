@@ -1,7 +1,7 @@
-import { IPost } from '../../types'
-import { ADD_POST, HIDE_MODAL, SHOW_MODAL, START_LOADING, END_LOADING, LOAD_POSTS, APP_LOADING, APP_LOADED, USER_SINGED_IN, USER_SINGED_OUT, SET_AUTH_TO_FASLE, SET_AUTH_TO_TRUE, CHANGE_DRAWLER_CONTROLLER, CHANGE_LOADER_MODAL, OPEN_POST_DETAIL_MODAL, CLOSE_POST_DETAIL_MODAL, SELECT_POST_DETAIL_MODAL_POST, LOAD_USER_UPDATE, LOAD_USER_UPDATE_ENDED, SET_USERS, SET_USER_FOLLOWING, SET_USER_FOLLOWERS } from './variables'
+import { IPost } from '../../../types'
+import { ADD_POST, HIDE_MODAL, SHOW_MODAL, START_LOADING, END_LOADING, LOAD_POSTS, APP_LOADING, APP_LOADED, USER_SINGED_IN, USER_SINGED_OUT, SET_AUTH_TO_FASLE, SET_AUTH_TO_TRUE, CHANGE_DRAWLER_CONTROLLER, CHANGE_LOADER_MODAL, OPEN_POST_DETAIL_MODAL, CLOSE_POST_DETAIL_MODAL, SELECT_POST_DETAIL_MODAL_POST, LOAD_USER_UPDATE, LOAD_USER_UPDATE_ENDED, SET_USERS, SET_USER_FOLLOWING, SET_USER_FOLLOWERS, SHOW__INTERECTION_MODAL, HIDE_INTERECTION_MODAL, SET_CURRENT_ITERECTING_ID, CHANGE_SELCTED_CHAT,  } from '../variables'
 
-import { IUser } from '../../types'
+import { IUser } from '../../../types'
 import { User } from '@firebase/auth'
 import { DocumentData } from '@firebase/firestore'
 
@@ -54,5 +54,23 @@ export const setUserFollowing = (payload: DocumentData[]) => ({
 
 export const setUserFollowers = (payload:DocumentData[]) => ({
   type: SET_USER_FOLLOWERS,
+  payload
+})
+
+export const showInterectionModal = () => ({
+  type: SHOW__INTERECTION_MODAL,
+})
+
+export const hideInterectionModal = () => ({
+  type: HIDE_INTERECTION_MODAL
+})
+
+export const setCurrentInterectionId = (payload: string) => ({
+  type: SET_CURRENT_ITERECTING_ID,
+  payload
+})
+
+export const changeSelectedChat = (payload: string) => ({
+  type: CHANGE_SELCTED_CHAT,
   payload
 })

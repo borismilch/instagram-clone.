@@ -1,17 +1,29 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Post from '../Post'
 import { IPost } from '../../../types'
 import PostsFallback from './PostsFallback'
 import { connect, useSelector } from 'react-redux'
 
-const Posts: React.FC<{posts: IPost[]}> = ({posts}) => {
-  console.log(posts)
+import { db } from '../../../../firebase'
+import { useCollectionData } from 'react-firebase-hooks/firestore'
+
+import { query, collection, orderBy } from '@firebase/firestore'
+import SkeletonPosts from '../skeleton/SkeletonPosts'
+
+const Posts: React.FC<{}> = () => {
+
+  const [posts, loading]: any = useCollectionData(
+    query(collection(db, 'posts'), orderBy('timestamp', 'desc'))
+  )
+
+  if (loading )  {  return <> <SkeletonPosts /> </> }
+
+  if (!posts.length) { return <PostsFallback />  }
+
   return (
-   <>
-   { posts.length ? 
-   <> {  posts.map(post => (<Post key={post.id} post={post} /> )) } </> : <PostsFallback /> 
-   }
-  </>
+
+    <> { posts.map((post: IPost) => (<Post  key={post.id}  post={post} /> )) } </>
+    
   )
 }
   

@@ -1,0 +1,37 @@
+
+.circle{
+  width: 100% !important;
+ 
+}
+
+.circle  svg{
+  width: 192px;
+  fill:none;
+  stroke:#8a3ab9;
+  stroke-linecap: round;
+  stroke-width:3;
+  stroke-dasharray: 1;
+  stroke-dashoffset: 0;
+  animation: stroke-draw 6s ease-out infinite alternate; 
+  position: absolute;
+  top: -21px;
+  left: 110px;
+}
+
+@media (max-width: 970px) {
+  .circle svg {
+   display: none;
+  }
+}
+
+@keyframes stroke-draw {
+  from{
+    stroke:#8a3ab9;
+    stroke-dasharray: 1;
+  }
+  to{
+    stroke:#cd486b;
+    transform:rotate(180deg);
+    stroke-dasharray: 8;
+  }
+}

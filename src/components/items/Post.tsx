@@ -5,8 +5,6 @@ import PostForm from './post/PostForm'
 
 import PostHeader from './post/PostHeader'
 
-import { KeepAlive } from 'react-keep-alive'
-
 import PostSkeleton from './post/PostSkeleton'
 
 import LikeAnimation from '../pure/LikeAnimation'
@@ -24,6 +22,7 @@ const Post: React.FC<{post: IPost}> = ({post}) => {
   const [liked, setLiked] = useState(false)
   const [likes, setLikes] = useState<DocumentData[]>([])
 
+  const [loadedImage, setloadedImage] = useState(false)
 
   useEffect(() => 
     onSnapshot(
@@ -53,7 +52,7 @@ const Post: React.FC<{post: IPost}> = ({post}) => {
   }, [])
 
   const likePost = async () => {
-    console.log(liked)
+
     const data = {
       username: user.displayName,
       userId: user.uid,
@@ -61,7 +60,7 @@ const Post: React.FC<{post: IPost}> = ({post}) => {
       userImage: user.photoURL
     }
     const docRef = doc(db, 'posts', post.id, 'likes', user.uid)
-    console.log(data)
+
     if (liked) {
       await deleteDoc(docRef)
     }
@@ -70,21 +69,17 @@ const Post: React.FC<{post: IPost}> = ({post}) => {
     }
   }
 
-  const [imageLoaded, setImageLoaded] = useState<boolean>(false)
-
-  const loadImage = () => {
-    setImageLoaded(true)
-  }
- 
   return (
     <div className='mb-5'>
       
-    <div className={ imageLoaded ? 'opacity-100 relative' : 'opacity-0 absolute'}>
-      <PostHeader userImg={post.userImg} username={post.username} />
+      { !loadedImage &&  <PostSkeleton /> }
+
+     <div className={ !loadedImage ? 'opacity-0 absolute' : 'opacity-100 relative' }>
+      <PostHeader postId={post.id + ' ' + post.uid} userImg={post.userImg} username={post.username} />
 
       <div className='relative'>
         <LikeAnimation likeFunction={likePost} />
-        <img onLoad={loadImage} src={post.img} className='object-cover w-full' alt="" />
+        <img onLoad={() => setloadedImage(true)} src={post.img} className='object-cover w-full' alt="" />
       </div>
     
 
@@ -93,7 +88,8 @@ const Post: React.FC<{post: IPost}> = ({post}) => {
         <PostForm id={post.id} />
         </div>
       </PostFooter>
-    </div>  
+     </div>  
+
     </div>
   )
 }

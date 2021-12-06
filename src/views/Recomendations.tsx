@@ -5,7 +5,7 @@ import { connect, useSelector } from 'react-redux'
 import './grid.css'
 import { IUser } from '../types'
 import { collection, onSnapshot } from '@firebase/firestore'
-import { setUserFollowers, setUserFollowing } from '../redux/actions/generators'
+import { setUserFollowers, setUserFollowing } from '../redux/actions/creators'
 import { db } from '../../firebase'
 
 

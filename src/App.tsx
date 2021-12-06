@@ -9,11 +9,15 @@ import { readiedSignIn } from './redux/actions/actions/userActions'
 
 import { useSelector, connect, useDispatch } from 'react-redux'
 
+import { Redirect } from 'react-router-dom'
+
 import { ConnectedRouter } from 'connected-react-router'
 
 import { history } from './redux/store'
 import MainLayout from './components/layout/MainLayout'
 import Loader from './components/layout/home/loaders/Loader'
+
+import { useAuthState } from 'react-firebase-hooks/auth'
 
 import { Provider as KeepAliveProvider } from 'react-keep-alive'
 
@@ -33,13 +37,14 @@ const App = () => {
 
   const dispatch = useDispatch()
 
-  auth.onAuthStateChanged((user:any) => {
-    if(user) {
-      console.log(user)
-      const { providerData, uid, metadata } = user  
-      dispatch(readiedSignIn({...providerData[0], uid, ...metadata}))
-    }
-  })
+  const [user, loading]: any = useAuthState(auth)
+
+  if(user) {
+    const { providerData, uid, metadata } = user  
+    dispatch(readiedSignIn({...providerData[0], uid, ...metadata}))
+  }
+
+  if (!user && loading) { return <Loader /> }
 
   return (
     <ConnectedRouter history={history}> 
@@ -50,6 +55,7 @@ const App = () => {
      <Suspense fallback=''>
         <PostDetailModal />
       </Suspense>
+      { (!user && !loading) &&  <Redirect to='/auth/signin' /> }
       <Switch>
 
         <Route exact path="/photos">

@@ -1,5 +1,5 @@
 ::-webkit-scrollbar {
-  width: 10px;
+  width: 0px;
   height: 7px;
  
 }
@@ -19,10 +19,10 @@
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
   background: #5e5a5a; 
-  opacity: 1 !important;
+  opacity: 0 !important;
 }
 ::-webkit-scrollbar-track:hover {
-  opacity: 1 !important;
+  opacity: 0 !important;
 }
 
 .sml {
@@ -63,8 +63,7 @@
   }
 }
 
-@media (max-width: 996px) {
+
   span.inline-block.h-screen.align-middle {
     height: 0px;
   }
-}

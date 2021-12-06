@@ -7,6 +7,10 @@ import { userReducer } from "./reducers/userRuducer";
 
 import { drawlerReducer } from "./reducers/drawlerReducer";
 import { postModalReducer } from './reducers/post/postModalReducer'
+
+import { interectionModalReducer } from './reducers/interectionsModalReducers'
+
+import { chatReducer } from './reducers/chatReducer'
   
 export const rootReducer = (history: any) => combineReducers({
   app: appReducer,
@@ -14,5 +18,8 @@ export const rootReducer = (history: any) => combineReducers({
   router: connectRouter(history),
   drawler: drawlerReducer,
   user: userReducer,
-  postDetailModal: postModalReducer
+  postDetailModal: postModalReducer,
+  interectionModal: interectionModalReducer,
+  chat: chatReducer,
+
 })

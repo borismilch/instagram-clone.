@@ -3,7 +3,7 @@ import React, { useState, useEffect, useMemo, ChangeEvent, useRef, SyntheticEven
 import { connect, useDispatch, useSelector } from 'react-redux'
 import { IComment, IPost, IPostIMage, IUser } from '../../../../types'
 
-import { hideModal } from '../../../../redux/actions/generators'
+import { hideModal } from '../../../../redux/actions/creators'
 
 import { Location } from '../../../icons'
 

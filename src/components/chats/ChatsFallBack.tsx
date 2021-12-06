@@ -23,8 +23,8 @@ const ChatsFallBack = () => {
         Отправляйте личные фото и сообщения другу или группе.
         </span>
 
-        <button className='submit_btn px-6'>
-            Send
+        <button className='submit_btn px-6 py-2'>
+        Отправить сообщение
         </button>
 
       </div>

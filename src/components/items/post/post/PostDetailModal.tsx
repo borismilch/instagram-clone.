@@ -4,7 +4,7 @@ import { IPost, IPostIMage } from '../../../../types'
 import PostDetailForm from './PostDetailForm'
 import ModalLayout from '../../../layout/ModalLayout'
 
-import { closepostDetailModal } from '../../../../redux/actions/generators'
+import { closepostDetailModal } from '../../../../redux/actions/creators'
 import { collection, deleteDoc, doc, onSnapshot, orderBy, query, serverTimestamp, setDoc } from '@firebase/firestore'
 import { db } from '../../../../../firebase'
 import PostActionFomr from './PostActionFomr'
@@ -76,6 +76,7 @@ const ConfiguratePost = () => {
 
   return (
     <ModalLayout isOpen={open} closeModal={closeModal}>
+      <div className='h-screen flex justify-center items-center overflow-y-hidden'>
 
       <div className='add_post_modal'>
 
@@ -96,7 +97,9 @@ const ConfiguratePost = () => {
         </div>
         </div>
 
+        </div>
       </div>
+    
     </ModalLayout>
    
   )
